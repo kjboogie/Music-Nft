@@ -1,3 +1,6 @@
+require("@nomiclabs/hardhat-waffle");
+const { ethers,artifacts } = require("hardhat");
+
 async function main() {
 
   const [deployer] = await ethers.getSigners();
@@ -6,10 +9,15 @@ async function main() {
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
   // deploy contracts here:
-  
-  
+  const NFTMarketplaceFactory = await ethers.getContractFactory('MusicNFTMarketplace');
+  const nftMarketplace = await NFTMarketplaceFactory.deploy();
+
+
+
+  console.log("Smart contract address: ",nftMarketplace.address)
+
   // For each contract, pass the deployed contract and name to this function to save a copy of the contract ABI and address to the front end.
-  saveFrontendFiles();
+  saveFrontendFiles(nftMarketplace,"MusicNFTMarketplace");
 }
 
 function saveFrontendFiles(contract, name) {
