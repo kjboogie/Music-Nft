@@ -150,14 +150,14 @@ describe("MusicNFTMarketplace", function () {
      });
 
      describe("Getter functions", function () {
-        let soldItems = [0, 1, ]
+        let soldItems = [0, 1 ]
         let ownedByUser1 = [0]
         let ownedByUser2 = [1]
         beforeEach(async function () {
           // user1 purchases item 0.
           await (await nftMarketplace.connect(user1).buyToken(0, { value: prices[0] })).wait();
           // user1 purchases item 1.
-          await (await nftMarketplace.connect(user1).buyToken(1, { value: prices[1] })).wait();
+          await (await nftMarketplace.connect(user2).buyToken(1, { value: prices[1] })).wait();
       
         })
     
@@ -172,13 +172,20 @@ describe("MusicNFTMarketplace", function () {
           // Get items owned by user1
           let myItems = await nftMarketplace.connect(user1).getMyTokens()
           // Check that the returned my items array is correct
-          expect(myItems.every(i => ownedByUser1.some(j => j === i.tokenId.toNumber()))).to.equal(true)
+         expect(myItems.every(i => ownedByUser1.some(j => j === i.tokenId.toNumber()))).to.equal(true)
+         //expect(myItems[0].tokenId).to.equal(0)
           expect(ownedByUser1.length === myItems.length).to.equal(true)
           // Get items owned by user2
-          myItems = await nftMarketplace.connect(user2).getMyTokens()
+
+         
+          let myItemss = await nftMarketplace.connect(user2).getMyTokens()
           // Check that the returned my items array is correct
-          expect(myItems.every(i => ownedByUser2.some(j => j === i.tokenId.toNumber()))).to.equal(true)
+          expect(myItemss.every(i => ownedByUser2.some(j => j === i.tokenId.toNumber()))).to.equal(true)
           expect(ownedByUser2.length === myItems.length).to.equal(true)
+        
+         //expect(myItemss[0].tokenId).to.equal("1")
+      
+       
         });
         
       });

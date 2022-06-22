@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract MusicNFTMarketplace is ERC721("BoogieFi","BooFi"), Ownable {
     // State variables
-    string public baseURI = "https://bafybeihyqawpffafu4db7yyekya6q5lisotgoqh6g27xegvy5vvzowwswm.ipfs.nftstorage.link/";
+    string public baseURI = "https://bafybeiahw57hf77zoofrydgytm62yjroraiuk2to2cos3gnesuyt7hfumm.ipfs.nftstorage.link/";
     string public baseExtension = ".json";  
     address public artist;  // address of the artist that deploys music NFTs
     uint256 public royaltyFee;  // roylty fee that artist gets when his NFTs gets sold
@@ -24,7 +24,7 @@ contract MusicNFTMarketplace is ERC721("BoogieFi","BooFi"), Ownable {
     event MarketItemBought( uint256 indexed tokenId, address indexed seller, address buyer, uint256  price );
     event MarketItemRelisted( uint256 indexed tokenId, address indexed seller,  uint256  price );
 
-    // In constructor we initialise the royalty fww, artist address and prices ofthe music NFTs
+    // In constructor we initialise the royalty fee, artist address and prices ofthe music NFTs
     constructor (
         uint256 _royaltFee,
         address _artist,
